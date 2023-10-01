@@ -1,0 +1,23 @@
+name: 'Maven Build'
+description: 'Build a Maven project'
+inputs:
+  maven-args:
+    description: 'Additional Maven command-line arguments (optional)'
+    required: false
+runs:
+  using: 'shell'
+  command: |
+    #!/bin/bash
+    set -e
+
+    # Input variables
+    maven_args="${INPUT_MAVEN_ARGS}"
+
+    # Default Maven goal
+    default_goal="clean install"
+
+    # Determine the Maven goal
+    maven_goal=${maven_args:-$default_goal}
+
+    # Execute the Maven build
+    mvn $maven_goal
